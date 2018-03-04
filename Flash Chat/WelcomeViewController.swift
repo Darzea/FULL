@@ -1,12 +1,12 @@
 //
 //  WelcomeViewController.swift
-//  Flash Chat
+//  Created by Darragh Meaney on 22/12/2017.
 //
 //  This is the welcome view controller - the first thign the user sees
 //
 
 import UIKit
-
+import Firebase
 
 
 class WelcomeViewController: UIViewController {
@@ -15,9 +15,9 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //TODO: Check to see if there is a user logged in already, if so send them straight through to the ChatViewController.
-    
-
+        if FIRAuth.auth()?.currentUser != nil {
+            performSegue(withIdentifier: "goToChat", sender: self)
+        }
     
     }
 

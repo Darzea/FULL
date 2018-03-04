@@ -1,12 +1,13 @@
 //
 //  LogInViewController.swift
-//  Flash Chat
+//  Created by Darragh Meaney on 22/12/2017.
 //
 //  This is the view controller where users login
 
 
 import UIKit
-
+import Firebase
+import SVProgressHUD
 
 class LogInViewController: UIViewController {
 
@@ -24,11 +25,20 @@ class LogInViewController: UIViewController {
     }
 
    
-    @IBAction func logInPressed(sender: AnyObject) {
+    @IBAction func logInPressed(_ sender: AnyObject) {
 
+        SVProgressHUD.show()
         
-        //TODO: Log in the user
-        
+        FIRAuth.auth()?.signIn(withEmail: emailTextfield.text!, password: passwordTextfield.text!, completion: { (user, error) in
+            if error != nil {
+                print(error!)
+            }
+            else {
+                SVProgressHUD.dismiss()
+                print("login successful")
+                self.performSegue(withIdentifier: "goToChat", sender: self)
+            }
+        })
         
     }
     
