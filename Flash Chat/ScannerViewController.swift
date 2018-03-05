@@ -76,6 +76,35 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         print(stringCodeValue)
         // Perform further logic needed (ex. redirect to other ViewController)
         
+        let alert = UIAlertController(title: "Alert", message: stringCodeValue, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in
+            switch action.style{
+            case .default:
+                print("default")
+                
+            case .cancel:
+                print("cancel")
+                
+            case .destructive:
+                print("destructive")
+                
+                
+            }}))
+        
+    }
+    
+    func messageBox(messageTitle: String, messageAlert: String, messageBoxStyle: UIAlertControllerStyle, alertActionStyle: UIAlertActionStyle, completionHandler: @escaping () -> Void)
+    {
+        let alert = UIAlertController(title: messageTitle, message: messageAlert, preferredStyle: messageBoxStyle)
+        
+        let okAction = UIAlertAction(title: "Ok", style: alertActionStyle) { _ in
+            completionHandler() // This will only get called after okay is tapped in the alert
+        }
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -96,12 +125,5 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         codeFrame.translatesAutoresizingMaskIntoConstraints = false
         return codeFrame
     }()
-    
-    
-  
-    
-    
-    
-    
-    
-}
+
+
